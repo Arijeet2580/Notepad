@@ -5,7 +5,7 @@ import java.io.*;
 import javax.swing.*;
 public class Notepad implements ActionListener
 {
-	public String x[] = {"Serif","Century Gothic","SansSerif","Monospaced","Courier",},nm="";
+    public String x[] = {"Serif","Century Gothic","SansSerif","Monospaced","Courier",},nm="";
     public int s[]={0,2,1},st=0;
     public int f[]={10,20,30,40,50},fs=20;
     JFrame frm;
@@ -17,176 +17,171 @@ public class Notepad implements ActionListener
     JMenuItem cutItem, copyItem, pasteItem, selectAll;
     JMenuItem f1,f2,f3,f4,f5,fs10,fs20,fs30,fs40,fs50, red, blue, green, white, plain, italics, bold ,r,g,b,bl,wt,ON,OFF;
     JTextArea txtarea;
-	public Notepad() {
-		// TODO Auto-generated constructor stub
+    public Notepad() 
+    {
 		frm = new JFrame();
-        frm.setTitle(" Simple Notepad ");
+        	frm.setTitle(" Simple Notepad ");
+        	mnubar = new JMenuBar();
+        	mnubar.setBounds(0, 0, 1920, 25);
+       		txtarea = new JTextArea();
+        	txtarea.setBounds(0, 25, 1920, 1080);
+		jsrlpane = new JScrollPane(txtarea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        	txtarea.setFont(new Font("Tahoma", 0, 20));
+        	txtarea.setLineWrap(true);
+        	txtarea.setWrapStyleWord(true);
+        	//JMenu type Object creation
+        	fileMenu = new JMenu("File");
+        	editMenu = new JMenu("Edit");
+       		fontMenu = new JMenu("Format");
+        	helpMenu = new JMenu("Help");
+        	bg = new JMenu("Background");
+        	fontType = new JMenu("Font Type");
+        	fontStyle = new JMenu("Font Style");
+        	fontSize = new JMenu("Font Size");
+        	txtclr = new JMenu("Change text colour");
+        	wWrap = new JMenu( " Word Wrap ");
 
-        mnubar = new JMenuBar();
-        mnubar.setBounds(0, 0, 1920, 25);
+        	//Menu Items
+        	cutItem = new JMenuItem("Cut");
+        	copyItem = new JMenuItem("Copy");
+        	pasteItem = new JMenuItem("Paste");
+        	selectAll = new JMenuItem("Select All");
 
-        txtarea = new JTextArea();
-        txtarea.setBounds(0, 25, 1920, 1080);
+        	open = new JMenuItem("Open");
+        	saveAs = new JMenuItem("Save");
+        	close = new JMenuItem("Close");
 
-        jsrlpane = new JScrollPane(txtarea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        	f1 = new JMenuItem("Serif");
+        	f2 = new JMenuItem("Century Gothic");
+        	f3 = new JMenuItem("SansSerif");
+        	f4 = new JMenuItem("Monospaced");
+        	f5 = new JMenuItem("Courier");
 
-        txtarea.setFont(new Font("Tahoma", 0, 20));
-        txtarea.setLineWrap(true);
-        txtarea.setWrapStyleWord(true);
+        	fs10 = new JMenuItem("10");
+        	fs20 = new JMenuItem("20");
+        	fs30 = new JMenuItem("30");
+       	 	fs40 = new JMenuItem("40");
+        	fs50 = new JMenuItem("50");
 
-        //JMenu type Object creation
-        fileMenu = new JMenu("File");
-        editMenu = new JMenu("Edit");
-        fontMenu = new JMenu("Format");
-        helpMenu = new JMenu("Help");
-        bg = new JMenu("Background");
-        fontType = new JMenu("Font Type");
-        fontStyle = new JMenu("Font Style");
-        fontSize = new JMenu("Font Size");
-        txtclr = new JMenu("Change text colour");
-        wWrap = new JMenu( " Word Wrap ");
+        	red = new JMenuItem("Red");
+        	green = new JMenuItem("Green");
+        	blue = new JMenuItem("Blue");
+        	white = new JMenuItem("White");
 
-        //Menu Items
-        cutItem = new JMenuItem("Cut");
-        copyItem = new JMenuItem("Copy");
-        pasteItem = new JMenuItem("Paste");
-        selectAll = new JMenuItem("Select All");
+        	r = new JMenuItem("Red");
+        	g = new JMenuItem("Green");
+        	b = new JMenuItem("Blue");
+        	bl = new JMenuItem("Black");
+        	wt = new JMenuItem("White");
 
-        open = new JMenuItem("Open");
-        saveAs = new JMenuItem("Save");
-        close = new JMenuItem("Close");
+        	plain = new JMenuItem("Plain");
+        	italics = new JMenuItem("Italics");
+        	bold = new JMenuItem("Bold");
 
-        f1 = new JMenuItem("Serif");
-        f2 = new JMenuItem("Century Gothic");
-        f3 = new JMenuItem("SansSerif");
-        f4 = new JMenuItem("Monospaced");
-        f5 = new JMenuItem("Courier");
+        	ON = new JMenuItem("ON");
+        	OFF = new JMenuItem("OFF");
 
-        fs10 = new JMenuItem("10");
-        fs20 = new JMenuItem("20");
-        fs30 = new JMenuItem("30");
-        fs40 = new JMenuItem("40");
-        fs50 = new JMenuItem("50");
+        	abt = new JMenuItem("About");
 
-        red = new JMenuItem("Red");
-        green = new JMenuItem("Green");
-        blue = new JMenuItem("Blue");
-        white = new JMenuItem("White");
+        	//Action Listeners
+        	open.addActionListener(this);
+        	saveAs.addActionListener(this);
+        	close.addActionListener(this);
 
-        r = new JMenuItem("Red");
-        g = new JMenuItem("Green");
-        b = new JMenuItem("Blue");
-        bl = new JMenuItem("Black");
-        wt = new JMenuItem("White");
+        	copyItem.addActionListener(this);
+        	cutItem.addActionListener(this);
+        	selectAll.addActionListener(this);
+        	pasteItem.addActionListener(this);
 
-        plain = new JMenuItem("Plain");
-        italics = new JMenuItem("Italics");
-        bold = new JMenuItem("Bold");
+        	f1.addActionListener(this);
+        	f2.addActionListener(this);
+        	f3.addActionListener(this);
+        	f4.addActionListener(this);
+        	f5.addActionListener(this);
 
-        ON = new JMenuItem("ON");
-        OFF = new JMenuItem("OFF");
+        	fs10.addActionListener(this);
+        	fs20.addActionListener(this);
+        	fs30.addActionListener(this);
+        	fs40.addActionListener(this);
+        	fs50.addActionListener(this);
 
-        abt = new JMenuItem("About");
+        	plain.addActionListener(this);
+        	italics.addActionListener(this);
+        	bold.addActionListener(this);
 
-        //Action Listeners
-        open.addActionListener(this);
-        saveAs.addActionListener(this);
-        close.addActionListener(this);
+        	red.addActionListener(this);
+        	green.addActionListener(this);
+        	blue.addActionListener(this);
+       	 	white.addActionListener(this);
 
-        copyItem.addActionListener(this);
-        cutItem.addActionListener(this);
-        selectAll.addActionListener(this);
-        pasteItem.addActionListener(this);
+        	r.addActionListener(this);
+        	g.addActionListener(this);
+        	b.addActionListener(this);
+        	bl.addActionListener(this);
+        	wt.addActionListener(this);
 
-        f1.addActionListener(this);
-        f2.addActionListener(this);
-        f3.addActionListener(this);
-        f4.addActionListener(this);
-        f5.addActionListener(this);
+        	ON.addActionListener(this);
+        	OFF.addActionListener(this);
 
-        fs10.addActionListener(this);
-        fs20.addActionListener(this);
-        fs30.addActionListener(this);
-        fs40.addActionListener(this);
-        fs50.addActionListener(this);
+        	abt.addActionListener(this);
 
-        plain.addActionListener(this);
-        italics.addActionListener(this);
-        bold.addActionListener(this);
+        	//Adding menu buttons to menu bar
+        	mnubar.add(fileMenu);
+        	mnubar.add(editMenu);
+        	mnubar.add(fontMenu);
+        	mnubar.add(bg);
+        	mnubar.add(helpMenu);
 
-        red.addActionListener(this);
-        green.addActionListener(this);
-        blue.addActionListener(this);
-        white.addActionListener(this);
+        	fileMenu.add(open);
+        	fileMenu.add(saveAs);
+        	fileMenu.add(close);
 
-        r.addActionListener(this);
-        g.addActionListener(this);
-        b.addActionListener(this);
-        bl.addActionListener(this);
-        wt.addActionListener(this);
+        	editMenu.add(cutItem);
+        	editMenu.add(copyItem);
+        	editMenu.add(pasteItem);
+        	editMenu.add(selectAll);
 
-        ON.addActionListener(this);
-        OFF.addActionListener(this);
+        	fontMenu.add(fontType);
+        	fontType.add(f1);
+       	 	fontType.add(f2);
+        	fontType.add(f3);
+        	fontType.add(f4);
+        	fontType.add(f5);
+        	fontMenu.add(fontSize);
+       		 fontSize.add(fs10);
+        	fontSize.add(fs20);
+        	fontSize.add(fs30);
+        	fontSize.add(fs40);
+        	fontSize.add(fs50);
+        	fontMenu.add(fontStyle);
+        	fontStyle.add(plain);
+        	fontStyle.add(italics);
+	        fontStyle.add(bold);
+        	fontMenu.add(txtclr);
+        	txtclr.add(r);
+        	txtclr.add(g);
+        	txtclr.add(b);
+       	 	txtclr.add(bl);
+        	txtclr.add(wt);
+        	fontMenu.add(wWrap);
+        	wWrap.add(ON);
+        	wWrap.add(OFF);
 
-        abt.addActionListener(this);
+        	bg.add(red);
+        	bg.add(green);
+        	bg.add(blue);
+        	bg.add(white);
 
-        //Adding menu buttons to menu bar
-        mnubar.add(fileMenu);
-        mnubar.add(editMenu);
-        mnubar.add(fontMenu);
-        mnubar.add(bg);
-        mnubar.add(helpMenu);
+        	helpMenu.add(abt);
 
-        fileMenu.add(open);
-        fileMenu.add(saveAs);
-        fileMenu.add(close);
-
-        editMenu.add(cutItem);
-        editMenu.add(copyItem);
-        editMenu.add(pasteItem);
-        editMenu.add(selectAll);
-
-        fontMenu.add(fontType);
-        fontType.add(f1);
-        fontType.add(f2);
-        fontType.add(f3);
-        fontType.add(f4);
-        fontType.add(f5);
-        fontMenu.add(fontSize);
-        fontSize.add(fs10);
-        fontSize.add(fs20);
-        fontSize.add(fs30);
-        fontSize.add(fs40);
-        fontSize.add(fs50);
-        fontMenu.add(fontStyle);
-        fontStyle.add(plain);
-        fontStyle.add(italics);
-        fontStyle.add(bold);
-        fontMenu.add(txtclr);
-        txtclr.add(r);
-        txtclr.add(g);
-        txtclr.add(b);
-        txtclr.add(bl);
-        txtclr.add(wt);
-        fontMenu.add(wWrap);
-        wWrap.add(ON);
-        wWrap.add(OFF);
-
-        bg.add(red);
-        bg.add(green);
-        bg.add(blue);
-        bg.add(white);
-
-        helpMenu.add(abt);
-
-        //Adding menu buttons to menu bar
-        frm.add(mnubar);
-        frm.add(txtarea);
-        txtarea.add(jsrlpane);
-        frm.setLayout(null);
-        frm.setSize(800, 600);
-        frm.setVisible(true);
-        frm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        	//Adding menu buttons to menu bar
+        	frm.add(mnubar);
+	        frm.add(txtarea);
+        	txtarea.add(jsrlpane);
+        	frm.setLayout(null);
+        	frm.setSize(800, 600);
+	        frm.setVisible(true);
+        	frm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == cutItem)
